@@ -1,0 +1,12 @@
+w_std: 0.045
+v_std: 0.05
+
+##### Observation update noise parameter
+phi_cct: 400.0   #phi_std = 1/sqrt(phi_cct) --> phi_cct = 1/sqr(phi_std) = 1/phi_var
+d_std: 0.7
+
+
+#Data set parameters that Tsang-Kai gave me:
+SENSOR_VAR = 0.01 --> std = 0.1  (for odometry)
+RANGE_VAR = 0.0215 --> std = 0.147
+BEARING_VAR = 0.01  -->std =0.1 --> phi_cct = 100
