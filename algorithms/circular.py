@@ -29,7 +29,7 @@ class circular_loc_algo:
 		self.module_x_array = []
 		self.module_y_array = []
 
-		self.num_of_module = 5  #m = 4
+		self.num_of_module = 6  #m = 4
 		_lambda = 1.5
 		for i in range(self.num_of_module):   
 			self.module_x_array.append(GridModule(0.5*math.pow(_lambda,i), _phase = 2.0*np.pi *_x /(0.5 * math.pow(_lambda,i)), _concentration = 10000))

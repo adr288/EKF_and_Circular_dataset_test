@@ -1,7 +1,6 @@
 import numpy as np
 
 def get_start_end_indeces(data, start_time, end_time):
-	print("get_start_end_indeces called")
 	start_time_index = np.where(data[:,0] == start_time) # get the index of the starting time
 	end_time_index = np.where(data[:,0] == end_time)   # get the index of the ending time
 
