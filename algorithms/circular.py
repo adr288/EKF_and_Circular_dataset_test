@@ -22,18 +22,18 @@ class GridModule:
 
 
 class circular_loc_algo:
-	def __init__(self, _phase=0, _concentration=0.0001, _x=0,_y=0):
+	def __init__(self, _phase=0, _concentration=0.0001):
 		# estimate
 
 		self.theta_est = CircularEstimate(_phase, _concentration)
 		self.module_x_array = []
 		self.module_y_array = []
 
-		self.num_of_module = 6  #m = 4
+		self.num_of_module = 4  #m = 4
 		_lambda = 1.5
 		for i in range(self.num_of_module):   
-			self.module_x_array.append(GridModule(0.5*math.pow(_lambda,i), _phase = 2.0*np.pi *_x /(0.5 * math.pow(_lambda,i)), _concentration = 10000))
-			self.module_y_array.append(GridModule(0.5*math.pow(_lambda,i), _phase = 2.0*np.pi *_y /(0.5 * math.pow(_lambda,i)), _concentration = 10000))
+			self.module_x_array.append(GridModule(0.5*math.pow(_lambda,i), 0, 10000))
+			self.module_y_array.append(GridModule(0.5*math.pow(_lambda,i), 0, 10000))
 
 
 		# self._x = 0
@@ -93,7 +93,9 @@ class circular_loc_algo:
 			self.module_y_array[i].observation_update(_equ_y, _equ_std)
 
 
-	def _grid_to_catesian(self, module_array, max_value=6, min_value=-6): #Changes from -1.2-1.2 to -10-10
+
+
+	def _grid_to_catesian(self, module_array, max_value=2, min_value=-1): #Changes from -1.2-1.2 to -10-10
 		_num = 801
 
 		_space = np.linspace(min_value, max_value, num=_num)
@@ -105,32 +107,6 @@ class circular_loc_algo:
 				_likelihood[i] += module.estimate.concentration * (math.cos(2.0*math.pi*_point/module.scale - module.estimate.phase))
 
 		return _space[np.argmax(_likelihood)]
-
-	# def _grid_to_catesian_x(self, module_array, max_value=3, min_value=1): #Changes from -1.2-1.2 to -10-10
-	# 	_num = 801
-
-	# 	_space = np.linspace(min_value, max_value, num=_num)
-	# 	_likelihood = np.zeros_like(_space) 
-
-	# 	for i in range(_num):
-	# 		_point = _space[i]
-	# 		for module in module_array:
-	# 			_likelihood[i] += module.estimate.concentration * (math.cos(2.0*math.pi*_point/module.scale - module.estimate.phase))
-
-	# 	return _space[np.argmax(_likelihood)]
-
-	# def _grid_to_catesian_y(self, module_array, max_value=-2, min_value=-5): #Changes from -1.2-1.2 to -10-10
-	# 	_num = 801
-
-	# 	_space = np.linspace(min_value, max_value, num=_num)
-	# 	_likelihood = np.zeros_like(_space) 
-
-	# 	for i in range(_num):
-	# 		_point = _space[i]
-	# 		for module in module_array:
-	# 			_likelihood[i] += module.estimate.concentration * (math.cos(2.0*math.pi*_point/module.scale - module.estimate.phase))
-
-	# 	return _space[np.argmax(_likelihood)]
 
 	def cartesian_readout(self):
 		_x = self._grid_to_catesian(self.module_x_array)

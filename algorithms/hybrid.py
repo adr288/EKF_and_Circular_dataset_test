@@ -33,7 +33,6 @@ class hybrid_loc_algo:
 
 
 	def bd_observation_update(self, landmark, bearing, bearing_cct, distance, distance_std):
-
 		distance_cov = distance_std ** 2
 
 		dx = landmark[0]-self.x_est.mean
@@ -56,9 +55,7 @@ class hybrid_loc_algo:
 
 		# estimate update
 		self.theta_est.force_observation_update(_equ_phase, _equ_phase_cct)
-		# print("Hybrid x")
 		self.x_est.observation_update(_equ_x, _equ_std)
-		# print("Hybrid y")
 		self.y_est.observation_update(_equ_y, _equ_std)
 
 	def read_estimation(self):

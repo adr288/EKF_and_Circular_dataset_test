@@ -22,7 +22,6 @@ class GaussianEstimate:
 
 		self.mean = self.mean + (self.cov/(self.cov+_input_cov))*(_input_mean-self.mean)
 		self.cov = 1.0 / (1.0/self.cov + 1.0/_input_cov)
-		# print(self.mean)
 
 
 class CircularEstimate:
